@@ -1,6 +1,7 @@
---- atop-1.2/acctproc.c.orig	Thu Nov 29 13:06:58 2001
-+++ atop-1.2/acctproc.c	Wed Aug 28 14:27:15 2002
-@@ -45,6 +45,7 @@
+diff -durN atop-1.6.orig/acctproc.c atop-1.6/acctproc.c
+--- atop-1.6.orig/acctproc.c	Tue Sep  3 10:03:33 2002
++++ atop-1.6/acctproc.c	Tue Sep 17 14:17:57 2002
+@@ -55,6 +55,7 @@
  
  #include <sys/types.h>
  #include <stdio.h>
@@ -8,8 +9,8 @@
  #include <fcntl.h>
  #include <errno.h>
  #include <unistd.h>
-@@ -64,7 +65,11 @@
- static	uint	acctsize = 0;	/* previous size of account file	  */
+@@ -76,7 +77,11 @@
+ static	uint	acctsize;	/* previous size of account file	  */
  int   		acctfd   = -1;	/* fd of account file       		  */
  
 +#ifdef __alpha__
@@ -20,8 +21,8 @@
  
  /*
  ** Semaphore-handling
-@@ -372,9 +377,14 @@
- 		api->mem.rgrow  = 0;
+@@ -419,8 +424,13 @@
+ 		api->cpu.utime  = acctexp(acctrec.ac_utime);
  		api->mem.minflt = acctexp(acctrec.ac_minflt);
  		api->mem.majflt = acctexp(acctrec.ac_majflt);
 +#ifdef __alpha
@@ -29,14 +30,12 @@
 +		api->dsk.ior	= 0;
 +#else
  		api->mem.iosw   = acctexp(acctrec.ac_swaps);
--		api->mem.shtext = 0;
  		api->dsk.ior    = acctexp(acctrec.ac_rw);
 +#endif
-+		api->mem.shtext = 0;
- 		api->dsk.iow    = 0;
- 		api->net.tcpsnd = 0;
- 		api->net.tcprcv = 0;
-@@ -392,8 +402,13 @@
+ 
+ 		strcpy(api->gen.name, acctrec.ac_comm);
+ 	}
+@@ -433,8 +443,13 @@
  /*
  ** expand the special compression-method
  */
