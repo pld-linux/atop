@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
+# Source0-md5:	b0768ebb0df2b8fa4275e14c6f60d652
 Patch0:		%{name}-acct-alpha.patch
 URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
 BuildRequires:	ncurses-devel
