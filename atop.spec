@@ -1,14 +1,14 @@
+Summary:	AT Computing System and Process Monitor
+Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 Name:		atop
 Version:	1.2
 Release:	1
-Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
-URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-BuildRequires:	ncurses-devel
-Summary:	AT Computing System and Process Monitor
-Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 License:	GPL
 Group:		System Environment
+Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
+URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
+BuildRequires:	ncurses-devel
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 The program atop is an interactive monitor to view the load on a
@@ -35,22 +35,19 @@ równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d  $RPM_BUILD_ROOT%{_mandir}/man1
-install -m 0644 man/* $RPM_BUILD_ROOT%{_mandir}/man1/
-install -d  $RPM_BUILD_ROOT%{_bindir}/
-install -m 04711 atop $RPM_BUILD_ROOT%{_bindir}/atop
+install -d  $RPM_BUILD_ROOT{%{_mandir}/man1,%{_bindir}}
+
+install man/* $RPM_BUILD_ROOT%{_mandir}/man1/
+#install 04711 atop $RPM_BUILD_ROOT%{_bindir}/atop
+install atop $RPM_BUILD_ROOT%{_bindir}/atop
+
+gzip -nf9 README
 
 %clean
 rm -rf    $RPM_BUILD_ROOT
 
-%post
-
-%preun
-
-%postun
-
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc *.gz
 %attr(755,root,root) %{_bindir}/atop
 %{_mandir}/man1/atop.1*
