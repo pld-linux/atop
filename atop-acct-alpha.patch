@@ -1,0 +1,52 @@
+--- atop-1.2/acctproc.c.orig	Thu Nov 29 13:06:58 2001
++++ atop-1.2/acctproc.c	Wed Aug 28 14:27:15 2002
+@@ -45,6 +45,7 @@
+ 
+ #include <sys/types.h>
+ #include <stdio.h>
++#include <string.h>
+ #include <fcntl.h>
+ #include <errno.h>
+ #include <unistd.h>
+@@ -64,7 +65,11 @@
+ static	uint	acctsize = 0;	/* previous size of account file	  */
+ int   		acctfd   = -1;	/* fd of account file       		  */
+ 
++#ifdef __alpha__
++static long	acctexp(time_t ct);
++#else
+ static long 	acctexp(comp_t ct);
++#endif
+ 
+ /*
+ ** Semaphore-handling
+@@ -372,9 +377,14 @@
+ 		api->mem.rgrow  = 0;
+ 		api->mem.minflt = acctexp(acctrec.ac_minflt);
+ 		api->mem.majflt = acctexp(acctrec.ac_majflt);
++#ifdef __alpha
++		api->mem.iosw	= 0;
++		api->dsk.ior	= 0;
++#else
+ 		api->mem.iosw   = acctexp(acctrec.ac_swaps);
+-		api->mem.shtext = 0;
+ 		api->dsk.ior    = acctexp(acctrec.ac_rw);
++#endif
++		api->mem.shtext = 0;
+ 		api->dsk.iow    = 0;
+ 		api->net.tcpsnd = 0;
+ 		api->net.tcprcv = 0;
+@@ -392,8 +402,13 @@
+ /*
+ ** expand the special compression-method
+ */
++#ifdef __alpha
++long
++acctexp(time_t ct)
++#else
+ long
+ acctexp(comp_t ct)
++#endif
+ {
+         register long	e;
+         register long	f;
