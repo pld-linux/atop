@@ -22,7 +22,7 @@ network-load on process-level).
 
 %description -l pl
 Program atop to interaktywny monitor s³u¿±cy do obserwacji obci±¿enia
-systemu Linuksowego. Pokazuje zajêto¶æ najbardziej krytycznych dla
+systemu linuksowego. Pokazuje zajêto¶æ najbardziej krytycznych dla
 funkcjonowania systemu zasobów (z wydajno¶ciowego punktu widzenia) na
 poziomie systemu, np. procesora, pamiêci, dysków czy sieci. Pokazuje
 równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
