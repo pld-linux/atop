@@ -1,7 +1,7 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 Name:		atop
-Version:	1.8
+Version:	1.9
 Release:	1
 License:	GPL
 Group:		Applications/System
