@@ -2,10 +2,11 @@ Summary:	AT Computing System and Process Monitor
 Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 Name:		atop
 Version:	1.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		System Environment
 Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
+Patch0:		%{name}-acct-alpha.patch
 URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
 BuildRequires:	ncurses-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -28,6 +29,7 @@ równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 %{__make} \
@@ -41,13 +43,11 @@ install -d  $RPM_BUILD_ROOT{%{_mandir}/man1,%{_bindir}}
 install man/* $RPM_BUILD_ROOT%{_mandir}/man1/
 install atop $RPM_BUILD_ROOT%{_bindir}/atop
 
-gzip -nf9 README
-
 %clean
 rm -rf    $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README
 %attr(755,root,root) %{_bindir}/atop
 %{_mandir}/man1/atop.1*
