@@ -25,7 +25,7 @@ systemu Linuksowego. Pokazuje zajêto¶æ najbardziej krytycznych dla
 funkcjonowania systemu zasobów (z wydajno¶ciowego punktu widzenia) na
 poziomie systemu, np. procesora, pamiêci, dysków czy sieci. Pokazuje
 równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
-(znów: na poziomie procesora, pamieci, dysków czy sieci).
+(znów: na poziomie procesora, pamiêci, dysków czy sieci).
 
 %prep
 %setup -q
