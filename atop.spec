@@ -2,9 +2,9 @@ Summary:	AT Computing System and Process Monitor
 Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 Name:		atop
 Version:	1.6
-Release:	1
+Release:	2
 License:	GPL
-Group:		System Environment
+Group:		Applications/System
 Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
 Patch0:		%{name}-acct-alpha.patch
 URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
