@@ -31,14 +31,14 @@ równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
 
 %build
 %{__make} \
-	'CFLAGS=-I/usr/include/ncurses/'
+	CC="%{__cc}" \
+	CFLAGS="-I/usr/include/ncurses %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d  $RPM_BUILD_ROOT{%{_mandir}/man1,%{_bindir}}
 
 install man/* $RPM_BUILD_ROOT%{_mandir}/man1/
-#install 04711 atop $RPM_BUILD_ROOT%{_bindir}/atop
 install atop $RPM_BUILD_ROOT%{_bindir}/atop
 
 gzip -nf9 README
