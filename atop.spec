@@ -10,6 +10,7 @@ Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
 Patch0:		%{name}-acct-alpha.patch
 URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
 BuildRequires:	ncurses-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
