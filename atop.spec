@@ -1,14 +1,14 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
 Name:		atop
-Version:	1.13
+Version:	1.16
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	ftp://ftp.atcomputing.nl/pub/tools/linux/%{name}-%{version}.tar.gz
-# Source0-md5:	dc8b06fa24ba29682382c81e68c64180
+Source0:	http://www.atconsultancy.nl/atop/packages/%{name}-%{version}.tar.gz
+# Source0-md5:	f38943fc6b53758fa7bcfcb14dcdbe8a
 Patch0:		%{name}-acct-alpha.patch
-URL:		ftp://ftp.atcomputing.nl/pub/tools/linux/
+URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,7 +31,7 @@ równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
 
 %prep
 %setup -q
-%patch -p1
+#%patch0 -p1
 
 %build
 %{__make} \
