@@ -7,7 +7,6 @@ License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.atconsultancy.nl/atop/packages/%{name}-%{version}.tar.gz
 # Source0-md5:	4939916b1f2d03cb6c46752e6311adbb
-Patch0:		%{name}-acct-alpha.patch
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
@@ -31,7 +30,6 @@ równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %{__make} \
