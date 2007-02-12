@@ -1,5 +1,5 @@
 Summary:	AT Computing System and Process Monitor
-Summary(pl):	Monitor obci±¿enia systemu alternatywny dla programu top
+Summary(pl.UTF-8):   Monitor obciÄ…Å¼enia systemu alternatywny dla programu top
 Name:		atop
 Version:	1.19
 Release:	1
@@ -20,13 +20,13 @@ i.e. cpu, memory, disk and network. It also shows which processes are
 responsible for the indicated load (again cpu-, memory-, disk- and
 network-load on process-level).
 
-%description -l pl
-Program atop to interaktywny monitor s³u¿±cy do obserwacji obci±¿enia
-systemu linuksowego. Pokazuje zajêto¶æ najbardziej krytycznych dla
-funkcjonowania systemu zasobów (z wydajno¶ciowego punktu widzenia) na
-poziomie systemu, np. procesora, pamiêci, dysków czy sieci. Pokazuje
-równie¿ które procesy s± odpowiedzialne za generowane obci±¿enie
-(znów: na poziomie procesora, pamiêci, dysków czy sieci).
+%description -l pl.UTF-8
+Program atop to interaktywny monitor sÅ‚uÅ¼Ä…cy do obserwacji obciÄ…Å¼enia
+systemu linuksowego. Pokazuje zajÄ™toÅ›Ä‡ najbardziej krytycznych dla
+funkcjonowania systemu zasobÃ³w (z wydajnoÅ›ciowego punktu widzenia) na
+poziomie systemu, np. procesora, pamiÄ™ci, dyskÃ³w czy sieci. Pokazuje
+rÃ³wnieÅ¼ ktÃ³re procesy sÄ… odpowiedzialne za generowane obciÄ…Å¼enie
+(znÃ³w: na poziomie procesora, pamiÄ™ci, dyskÃ³w czy sieci).
 
 %prep
 %setup -q
