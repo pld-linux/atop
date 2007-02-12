@@ -1,5 +1,5 @@
 Summary:	AT Computing System and Process Monitor
-Summary(pl.UTF-8):   Monitor obciążenia systemu alternatywny dla programu top
+Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
 Version:	1.19
 Release:	1
