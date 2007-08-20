@@ -1,12 +1,12 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	1.20
+Version:	1.21
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.atconsultancy.nl/atop/packages/%{name}-%{version}.tar.gz
-# Source0-md5:	ca4c8f47532b25aa0afd7d1061a1ad11
+# Source0-md5:	572602848d694f7bc9e68c2eabaef753
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
@@ -50,4 +50,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHOR ChangeLog README
 %attr(755,root,root) %{_bindir}/atop
-%{_mandir}/man1/atop.1*
+%{_mandir}/man1/atop*.1*
