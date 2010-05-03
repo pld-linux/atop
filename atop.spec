@@ -6,7 +6,7 @@ Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.atconsultancy.nl/atop/packages/%{name}-%{version}.tar.gz
-# Source0-md5:	8b67756a71ca49728b402da369c4f26e
+# Source0-md5:	aed0ce588c41bc73817b9e3c584f441a
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
