@@ -5,7 +5,7 @@ Version:	1.25
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.atconsultancy.nl/atop/packages/%{name}-%{version}.tar.gz
+Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
 # Source0-md5:	8b67756a71ca49728b402da369c4f26e
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
