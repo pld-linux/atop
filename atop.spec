@@ -1,12 +1,12 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	1.25
+Version:	1.26
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
-# Source0-md5:	8b67756a71ca49728b402da369c4f26e
+# Source0-md5:	6904325d1cafd3e5145994c8cffa1f99
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
