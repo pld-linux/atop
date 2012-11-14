@@ -1,12 +1,14 @@
+%define		subver	1
+
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	1.26
-Release:	2
+Version:	2.0
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
-# Source0-md5:	6904325d1cafd3e5145994c8cffa1f99
+Source0:	http://www.atoptool.nl/download/%{name}-%{version}-%{subver}.tar.gz
+# Source0-md5:	6867ea2211edaf8140b94130470d646b
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
@@ -29,7 +31,7 @@ również które procesy są odpowiedzialne za generowane obciążenie
 (znów: na poziomie procesora, pamięci, dysków czy sieci).
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}-%{subver}
 
 %build
 %{__make} \
