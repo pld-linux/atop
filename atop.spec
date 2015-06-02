@@ -1,3 +1,5 @@
+# TODO
+# - initscripts, logs, crons (see rpm files section at bottom of the spec)
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
@@ -9,6 +11,7 @@ Source0:	http://www.atoptool.nl/download/%{name}-%{version}-1.tar.gz
 # Source0-md5:	d956f5b0c7e0705cff6cf44898d664d7
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
+BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -31,6 +34,8 @@ również które procesy są odpowiedzialne za generowane obciążenie
 %prep
 %setup -q
 
+%{__sed} -i -e '/chown root/d' Makefile
+
 %build
 %{__make} \
 	CC="%{__cc}" \
@@ -38,11 +43,13 @@ również które procesy są odpowiedzialne za generowane obciążenie
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_mandir}/{man1,man5},%{_bindir}}
+install -d $RPM_BUILD_ROOT%{_sbindir}
+%{__make} install \
+	INIPATH=/etc/rc.d/init.d \
+	DESTDIR=$RPM_BUILD_ROOT
 
-cp -p man/*.1* $RPM_BUILD_ROOT%{_mandir}/man1
-cp -p man/*.5* $RPM_BUILD_ROOT%{_mandir}/man5
-install -p atop $RPM_BUILD_ROOT%{_bindir}/atop
+# drop versioned links
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/{atop,atopsar}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -51,5 +58,24 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHOR ChangeLog README
 %attr(755,root,root) %{_bindir}/atop
+%attr(755,root,root) %{_bindir}/atopsar
+%attr(755,root,root) %{_sbindir}/atopacctd
 %{_mandir}/man1/atop*.1*
 %{_mandir}/man5/atoprc*.5*
+%{_mandir}/man8/atopacctd.8*
+
+# review and package these:
+# don't forget R: procps, find, etc what they use
+%if 0
+%dir %{_sysconfdir}/%{name}
+# atop.daily - invoked from cron, move to %{_prefix}/lib instead?
+%attr(755,root,root) %{_sysconfdir}/%{name}/atop.daily
+%attr(754,root,root) /etc/rc.d/init.d/atop
+%attr(754,root,root) /etc/rc.d/init.d/atopacct
+%config(noreplace) %verify(not md5 mtime size) /etc/cron.d/atop
+%config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/psaccs_atop
+%config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/psaccu_atop
+%dir /var/log/atop
+%ghost /var/log/atop/dummy_after
+%ghost /var/log/atop/dummy_before
+%endif
