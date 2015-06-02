@@ -1,14 +1,12 @@
-%define		subver	1
-
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	2.0
+Version:	2.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.atoptool.nl/download/%{name}-%{version}-%{subver}.tar.gz
-# Source0-md5:	6867ea2211edaf8140b94130470d646b
+Source0:	http://www.atoptool.nl/download/%{name}-%{version}-1.tar.gz
+# Source0-md5:	d956f5b0c7e0705cff6cf44898d664d7
 URL:		http://www.atcomputing.nl/Tools/atop
 BuildRequires:	ncurses-devel
 BuildRequires:	zlib-devel
@@ -31,7 +29,7 @@ również które procesy są odpowiedzialne za generowane obciążenie
 (znów: na poziomie procesora, pamięci, dysków czy sieci).
 
 %prep
-%setup -q -n %{name}-%{version}-%{subver}
+%setup -q
 
 %build
 %{__make} \
@@ -42,9 +40,9 @@ również które procesy są odpowiedzialne za generowane obciążenie
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_mandir}/{man1,man5},%{_bindir}}
 
-install man/*.1* $RPM_BUILD_ROOT%{_mandir}/man1/
-install man/*.5* $RPM_BUILD_ROOT%{_mandir}/man5/
-install atop $RPM_BUILD_ROOT%{_bindir}/atop
+cp -p man/*.1* $RPM_BUILD_ROOT%{_mandir}/man1
+cp -p man/*.5* $RPM_BUILD_ROOT%{_mandir}/man5
+install -p atop $RPM_BUILD_ROOT%{_bindir}/atop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
