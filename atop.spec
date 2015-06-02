@@ -39,7 +39,8 @@ również które procesy są odpowiedzialne za generowane obciążenie
 %build
 %{__make} \
 	CC="%{__cc}" \
-	CFLAGS="-I/usr/include/ncurses %{rpmcflags}"
+	LDFLAGS="%{rpmldflags}" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
