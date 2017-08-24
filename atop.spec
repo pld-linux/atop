@@ -3,13 +3,13 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	2.1
+Version:	2.3.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.atoptool.nl/download/%{name}-%{version}-1.tar.gz
-# Source0-md5:	d956f5b0c7e0705cff6cf44898d664d7
-URL:		http://www.atcomputing.nl/Tools/atop
+Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
+# Source0-md5:	48e1dbef8c7d826e68829a8d5fc920fc
+URL:		https://www.atoptool.nl/
 BuildRequires:	ncurses-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
@@ -45,7 +45,8 @@ również które procesy są odpowiedzialne za generowane obciążenie
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sbindir}
-%{__make} install \
+
+%{__make} -j1 sysvinstall systemdinstall \
 	INIPATH=/etc/rc.d/init.d \
 	DESTDIR=$RPM_BUILD_ROOT
 
