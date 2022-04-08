@@ -36,8 +36,6 @@ również które procesy są odpowiedzialne za generowane obciążenie
 
 %{__sed} -i -e '/chown root/d' Makefile
 
-%{__sed} -i -e '1s|#!/usr/bin/python|#!%{__python3}|' atopgpud
-
 %build
 %{__make} \
 	CC="%{__cc}" \
