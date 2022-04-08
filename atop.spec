@@ -3,12 +3,12 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	2.5.0
+Version:	2.7.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
-# Source0-md5:	5a63d28c276e8f65e8186083b51c7f3a
+# Source0-md5:	25b41209435da224e4509dcc12bba328
 URL:		https://www.atoptool.nl/
 BuildRequires:	ncurses-devel
 BuildRequires:	sed >= 4.0
@@ -42,14 +42,15 @@ również które procesy są odpowiedzialne za generowane obciążenie
 %{__make} \
 	CC="%{__cc}" \
 	LDFLAGS="%{rpmldflags}" \
-	CFLAGS="%{rpmcflags}"
+	CFLAGS="%{rpmcppflags} %{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_sysconfdir}/default}
 
-%{__make} -j1 sysvinstall systemdinstall \
+%{__make} -j1 sysvinstall install \
 	INIPATH=/etc/rc.d/init.d \
+	DEFPATH=%{_sysconfdir}/sysconfig \
 	DESTDIR=$RPM_BUILD_ROOT
 
 # drop versioned links
@@ -62,11 +63,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHOR ChangeLog README
 %attr(755,root,root) %{_bindir}/atop
+%attr(755,root,root) %{_bindir}/atopcat
+%attr(755,root,root) %{_bindir}/atopconvert
 %attr(755,root,root) %{_bindir}/atopsar
 %attr(755,root,root) %{_sbindir}/atopacctd
+%attr(755,root,root) %{_sbindir}/atopgpud
 %{_mandir}/man1/atop*.1*
 %{_mandir}/man5/atoprc*.5*
 %{_mandir}/man8/atopacctd.8*
+%{_mandir}/man8/atopgpud.8*
 
 # review and package these:
 # don't forget R: procps, find, etc what they use
@@ -79,6 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) %verify(not md5 mtime size) /etc/cron.d/atop
 %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/psaccs_atop
 %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/psaccu_atop
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/atop
 %dir /var/log/atop
 %ghost /var/log/atop/dummy_after
 %ghost /var/log/atop/dummy_before
