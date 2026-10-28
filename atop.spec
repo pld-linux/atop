@@ -3,15 +3,20 @@
 Summary:	AT Computing System and Process Monitor
 Summary(pl.UTF-8):	Monitor obciążenia systemu alternatywny dla programu top
 Name:		atop
-Version:	2.7.1
+Version:	2.13.0
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.atoptool.nl/download/%{name}-%{version}.tar.gz
-# Source0-md5:	25b41209435da224e4509dcc12bba328
+Source0:	https://www.atoptool.nl/download/%{name}-%{version}.tar.gz
+# Source0-md5:	fbebe2c00e4407f07d64d2f903db6355
+# https://github.com/Atoptool/atop/commit/c0034e64f879a317077ccbb3b9e2388d9fc6e29e
+Patch0:		%{name}-cgroups-opendir.patch
+# https://github.com/Atoptool/atop/commit/b5bd37cdfa0b8a8a42382e713397025a1049606e
+Patch1:		%{name}-drawbar-fpe.patch
 URL:		https://www.atoptool.nl/
+BuildRequires:	glib2-devel
 BuildRequires:	ncurses-devel
-BuildRequires:	sed >= 4.0
+BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -33,8 +38,8 @@ również które procesy są odpowiedzialne za generowane obciążenie
 
 %prep
 %setup -q
-
-%{__sed} -i -e '/chown root/d' Makefile
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__make} \
@@ -59,10 +64,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHOR ChangeLog README
+%doc AUTHORS ChangeLog README
 %attr(755,root,root) %{_bindir}/atop
 %attr(755,root,root) %{_bindir}/atopcat
 %attr(755,root,root) %{_bindir}/atopconvert
+%attr(755,root,root) %{_bindir}/atophide
 %attr(755,root,root) %{_bindir}/atopsar
 %attr(755,root,root) %{_sbindir}/atopacctd
 %attr(755,root,root) %{_sbindir}/atopgpud

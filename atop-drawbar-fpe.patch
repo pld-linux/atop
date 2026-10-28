@@ -1,0 +1,47 @@
+From b5bd37cdfa0b8a8a42382e713397025a1049606e Mon Sep 17 00:00:00 2001
+From: Gerlof Langeveld <gerlof.langeveld@atoptool.nl>
+Date: Fri, 9 Oct 2026 18:16:42 +0200
+Subject: [PATCH] Solve FPE when terminal lines >= 125 (solves #416)
+
+When the number of terminal lines is greater than 124 more than
+100 lines are used for the PSI bar of memory in bar graph mode.
+The bar has been limited to a height of 100 now.
+Besides, the height of the CPU and disk graphs (that show
+percentages) was limited to 25 lines. This has been increased
+to 100 lines.
+---
+ drawbar.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/drawbar.c b/drawbar.c
+index 651a81ec..6b8c7346 100644
+--- a/drawbar.c
++++ b/drawbar.c
+@@ -164,7 +164,7 @@ static WINDOW 	*headwin, *midline, *colupper, *collower;
+ // struct for calling drawvertbars()
+ //
+ #define	MAXCAT		5	// maximum number of categories within one bar
+-#define	MAXHEIGHT	25	// maximum bar height in lines
++#define	MAXHEIGHT	100	// maximum bar height in lines
+ 
+ struct vertval {
+ 	int	barval;			// total value of bar
+@@ -1251,7 +1251,7 @@ drawvertbars(   struct perwindow *w,
+ 	int 	i, j, curline, curcol, barlines, realbars,
+ 		realcols, availcols, needcols;
+ 	int	autoscale, color, labwidth = 0, spacing = 1;
+-	float	valperunit, level;
++	double	valperunit, level;
+ 	int	ytitlelen  = strlen(ytitle), xtitlelen  = strlen(xtitle);
+ 	int	ytitleline, xtitlespace;
+ 	int	scalelen = snprintf(buf, sizeof buf, "%d", (int)barscale),
+@@ -2237,6 +2237,9 @@ drawmemory(struct perwindow *w, struct sstat *sstat, int nsecs,
+ 
+ 		if (psilines < 7)	// not enough lines?
+ 			psilines = 7;
++
++		if (psilines > MAXHEIGHT)
++			psilines = MAXHEIGHT;
+ 	}
+ 	else
+ 	{

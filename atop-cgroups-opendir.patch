@@ -1,0 +1,33 @@
+From c0034e64f879a317077ccbb3b9e2388d9fc6e29e Mon Sep 17 00:00:00 2001
+From: Bui Quang Minh <minhquangbui99@gmail.com>
+Date: Fri, 4 Sep 2026 21:27:45 +0700
+Subject: [PATCH] cgroups: check the returned value of opendir
+
+We have an unusual case when a cgroup controller directory grants other
+users with execute (x) permission but without read (r) permission. As a
+result, when running atop as a user who is not the owner of the
+directory, we succeed in the chdir but fail on opendir. Therefore,
+opendir returns NULL and leads to a crash. This commit checks the
+returned value of opendir and returns error when the value is NULL to
+avoid the crash.
+---
+ cgroups.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/cgroups.c b/cgroups.c
+index 434a0043..a7108028 100644
+--- a/cgroups.c
++++ b/cgroups.c
+@@ -375,6 +375,12 @@ walkcgroup(char *dirname, struct cgchainer *cparent, int parentseq,
+ 	//
+ 	dirp = opendir(".");
+ 
++	// If we don't have read permission in this directory,
++	// the opendir fails. Return error in that case.
++	//
++	if (!dirp)
++		return -1;
++
+ 	while ( (entp = readdir(dirp)) )
+ 	{
+ 		// skip dot files/directories
